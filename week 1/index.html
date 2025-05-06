@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Page with Fixed Navbar</title>
+  <style>
+    /* =========================
+       Global Styles & Reset
+    ========================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* =========================
+       Navigation Bar
+    ========================== */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 40px;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #333;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      padding: 8px 15px;
+      font-weight: 500;
+      color: #333;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* =========================
+       Hero Section
+    ========================== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+        url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      animation: fadeInUp 1.4s ease-out;
+    }
+
+    .btn {
+      background-color: #fff;
+      color: #333;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1.6s ease-out;
+    }
+
+    .btn:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* =========================
+       Section Styling
+    ========================== */
+    section {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .section-light {
+      background: #f9f9f9;
+    }
+
+    .section-dark {
+      background: #333;
+      color: #fff;
+    }
+
+    /* =========================
+       Animations
+    ========================== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        transform: translateY(-40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* =========================
+       Responsive Design
+    ========================== */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background-color: white;
+        position: absolute;
+        top: 100%;
+        right: 40px;
+        display: none;
+      }
+
+      header.active nav ul {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header/Nav -->
+  <header id="navbar">
+    <div class="logo">MyBrand</div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div>
+      <h1>Responsive Web Experience</h1>
+      <p>Fixed Navbar • Scroll Effects • Hover Interactions • Smooth Animations</p>
+      <a href="#features" class="btn">Explore More</a>
+    </div>
+  </section>
+
+  <!-- Feature Section -->
+  <section class="section-light" id="features">
+    <h2>Features</h2>
+    <p>Clean UI, Responsive Layout, CSS Animations, Scroll-based Styling</p>
+  </section>
+
+  <!-- About Section -->
+  <section class="section-dark" id="about">
+    <h2>About Us</h2>
+    <p>We specialize in modern front-end design and user-focused experiences.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section-light" id="contact">
+    <h2>Contact</h2>
+    <p>Reach out to us at hello@example.com or follow us on social media.</p>
+  </section>
+
+  <!-- Scroll-triggered Navbar Script -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("navbar");
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+  </script>
+
+</body>
+</html> 
